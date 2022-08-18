@@ -1,28 +1,30 @@
+import { Link } from 'react-router-dom'
 import './Post.css'
 
-function Post() {
+function Post({post}) {
   return (
     <div className="post">
+      <Link to={`/post/${post._id}`} style={{textDecoration:"none", color:"inherit"}}>
+      {post.photo &&
         <img className="postImg"
-        src="https://www.teahub.io/photos/full/231-2317254_jacqueline-fernandez-photos-hd.jpg"
+        src={post.photo}
         alt=""
-        />
+        />}
         <div className="postInfo">
             <div className="postCats">
-                <span className="postCat">Music</span>
-                <span className="postCat">Life</span>
+              {post.categories.map((c)=>(
+                <span className="postCat">{c.name}</span>
+              ))}
             </div>
-            <span className="postTitle">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+            <span className="postTitle">{post.title}</span>
             <hr/>
-            <span className="postDate">1 Hour Ago</span>
+            <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
         </div>
         <p className="postDescription">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis sunt, exercitationem nulla sapiente pariatur, autem eos reprehenderit porro deleniti iusto dolore dolorem veritatis obcaecati in voluptate. Saepe et error cumque!
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis sunt, exercitationem nulla sapiente pariatur, autem eos reprehenderit porro deleniti iusto dolore dolorem veritatis obcaecati in voluptate. Saepe et error cumque!
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis sunt, exercitationem nulla sapiente pariatur, autem eos reprehenderit porro deleniti iusto dolore dolorem veritatis obcaecati in voluptate. Saepe et error cumque!
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis sunt, exercitationem nulla sapiente pariatur, autem eos reprehenderit porro deleniti iusto dolore dolorem veritatis obcaecati in voluptate. Saepe et error cumque!
+          {post.desc}
         </p>
 
+      </Link>
     </div>
   )
 }

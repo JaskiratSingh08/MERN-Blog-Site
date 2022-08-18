@@ -1,6 +1,6 @@
 import Post from '../../components/post/Post'
 import Sidebar from '../../components/sidebar/Sidebar'
-import SinglePost from '../../singlepost/SinglePost'
+import SinglePost from '../../components/singlepost/SinglePost'
 import './Single.css'
 
 function Single() {
