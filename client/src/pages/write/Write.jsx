@@ -18,21 +18,42 @@ function Write() {
             desc
         }
         
-        axios.post("/posts",)
+        if(file){
+            const data = FormData();
+            const filename = Date.now() + file.name;
+            data.append("name",filename);
+            data.append("file",file);
+            newPost.photo = filename;
+            try{
+                await axios.post("/upload", data);
+            }catch(err){
+                console.log(err)    
+            }
+        }
+        try {
+            const res = await axios.post("/posts",newPost);
+            window.location.replace("/post/"+ res.data._id)
+        }catch(err){
+            console.log(err)    
+        }
     }
 
   return (
     <div className="write">
+        {file &&
         <img 
         className='writeImg'
-        src="https://www.teahub.io/photos/full/54-547630_beautiful-landscape-wallpapers-for-iphone-on-hd-wallpaper.jpg" 
-        alt="" />
+        src={URL.createObjectURL(file)} 
+        alt="Post_img" />
+    }
         <form className="writeForm" onSubmit={handleSubmit}>
             <div className="writeFormGroup">
                 <label htmlFor="fileinput">
                     <i className=" writeIcon fa-solid fa-plus"></i>
                 </label>
-                <input type="file" id='fileinput' style={{display:"none"}}/>
+                <input type="file" id='fileinput' style={{display:"none"}}
+                onChange={(e)=>setFile(e.target.files[0])}
+                />
                 <input type="text" placeholder='title' className="writeInput" autofocus={true} />
             </div>
             <div className="writeFormGroup">
