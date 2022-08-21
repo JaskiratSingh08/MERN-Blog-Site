@@ -19,7 +19,7 @@ function Write() {
         }
         
         if(file){
-            const data = FormData();
+            const data = new FormData();
             const filename = Date.now() + file.name;
             data.append("name",filename);
             data.append("file",file);
@@ -51,15 +51,30 @@ function Write() {
                 <label htmlFor="fileinput">
                     <i className=" writeIcon fa-solid fa-plus"></i>
                 </label>
-                <input type="file" id='fileinput' style={{display:"none"}}
+                <input 
+                type="file" 
+                id='fileinput' 
+                style={{display:"none"}}
                 onChange={(e)=>setFile(e.target.files[0])}
                 />
-                <input type="text" placeholder='title' className="writeInput" autofocus={true} />
+                <input 
+                type="text" 
+                placeholder='title' 
+                className="writeInput" 
+                autofocus={true} 
+                onChange={(e)=>setTitle(e.target.value)}
+                />
             </div>
             <div className="writeFormGroup">
-                <textarea id="" cols="30" rows="10" placeholder='Tell Your Story...'
+                <textarea 
+                id="" 
+                cols="30" 
+                rows="10" 
+                placeholder='Tell Your Story...'
                 type="text"
-                className='writeInput writeText'>
+                className='writeInput writeText'
+                onChange={(e)=>setDesc(e.target.value)}
+                >
 
                 </textarea>
             </div>
